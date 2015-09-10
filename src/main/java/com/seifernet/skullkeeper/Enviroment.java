@@ -15,10 +15,12 @@ public class Enviroment {
 		comment.setId( 123L );
 		
 		System.out.println( comment.toJSON( ) );
+		System.out.println( "hashtags" );
 		for( String x : comment.getContentHashtags( ) ){
 			System.out.println( x );
 		}
 		
+		System.out.println( "authortags" );
 		for( String x : comment.getContentAuthortags( ) ){
 			System.out.println( x );
 		}
