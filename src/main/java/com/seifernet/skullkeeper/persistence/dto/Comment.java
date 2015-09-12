@@ -1,4 +1,4 @@
-package com.seifernet.skullkeeper.persistence;
+package com.seifernet.skullkeeper.persistence.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,7 +42,9 @@ public class Comment implements Serializable{
 	
 	private Date date;
 	
-	private String author;
+	private String hash;
+	
+	private Author author;
 	
 	private String content;
 	
@@ -58,7 +60,7 @@ public class Comment implements Serializable{
 	@JoinTable( name = "authortag_index", 
 		joinColumns = { @JoinColumn( name="comment", referencedColumnName="id" ) },  
 		inverseJoinColumns = { @JoinColumn( name="authortag", referencedColumnName="id") } ) 
-	private List<Authortag> authortags;
+	private List<Author> authortags;
 	
 	/**
 	 * @return the date
@@ -167,29 +169,43 @@ public class Comment implements Serializable{
 	/**
 	 * @return the author
 	 */
-	public String getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
 	/**
 	 * @param author the author to set
 	 */
-	public void setAuthor(String author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 
 	/**
 	 * @return the authortags
 	 */
-	public List<Authortag> getAuthortags() {
+	public List<Author> getAuthortags() {
 		return authortags;
 	}
 
 	/**
 	 * @param authortags the authortags to set
 	 */
-	public void setAuthortags(List<Authortag> authortags) {
+	public void setAuthortags(List<Author> authortags) {
 		this.authortags = authortags;
+	}
+
+	/**
+	 * @return the hash
+	 */
+	public String getHash() {
+		return hash;
+	}
+
+	/**
+	 * @param hash the hash to set
+	 */
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	

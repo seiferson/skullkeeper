@@ -1,4 +1,4 @@
-package com.seifernet.skullkeeper.persistence;
+package com.seifernet.skullkeeper.persistence.dto;
 
 import java.io.Serializable;
 
