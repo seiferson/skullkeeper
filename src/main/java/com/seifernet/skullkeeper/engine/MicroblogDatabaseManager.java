@@ -96,9 +96,8 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * @return List containing latest 10 comments published
 	 */
 	public ArrayList<Comment> getComments( ) {
-		CommentDAO dao = new CommentDAO( );
 		
-		return new ArrayList<Comment>( dao.readAllDsc( "date" , 10 ) );
+		return getComments( 10 );
 	}
 
 	/**
@@ -108,9 +107,8 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * @return List containing the latest N comments published
 	 */
 	public ArrayList<Comment> getComments( int number ) {
-		CommentDAO dao = new CommentDAO( );
 		
-		return new ArrayList<Comment>( dao.readAllDsc( "date" , number ) );
+		return getComments( 0 , number );
 	}
 	
 	/**
@@ -122,7 +120,7 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	public ArrayList<Comment> getComments( int page, int pageSize ) {
 		CommentDAO dao = new CommentDAO( );
 		
-		return new ArrayList<Comment>( dao.readAll( page, pageSize ) );
+		return new ArrayList<Comment>( dao.getComments( page, pageSize ) );
 	}
 	
 	/**
@@ -133,56 +131,82 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	public Long getCommentsCount( ) {
 		CommentDAO dao = new CommentDAO( );
 		
-		return dao.getCount( );
+		return dao.getCommentsCount( );
 	}
 
-	
-	public ArrayList<Comment> getCommentsContaining(String hashtag) {
+	/**
+	 * Retrieves the latest 10 comments containing
+	 * a specific hastag
+	 * 
+	 * @return List containing latest 10 comments containing a specific hashtag
+	 */
+	public ArrayList<Comment> getCommentsContaining( String hashtag ) {
+		
+		return getCommentsContaining( hashtag, 0, 10 );
+	}
+
+	public ArrayList<Comment> getCommentsContaining( String hashtag, int number ) {
+		
+		return getCommentsContaining( hashtag, 0, number );
+	}
+
+	public ArrayList<Comment> getCommentsContaining( String hashtag, int page, int pageSize ) {
 		CommentDAO dao = new CommentDAO( );
-		return null;
+		
+		return new ArrayList<Comment>( dao.getCommentsContaining( hashtag, page, pageSize ) );
+	}
+	
+	public Long getCommentsContainingCount( String hashtag ) {
+		CommentDAO dao = new CommentDAO( );
+		
+		return dao.getCommentsContainingCount( hashtag );
 	}
 
-	public ArrayList<Comment> getCommentsContaining(String hashtag, int number) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Comment> getCommentsAuthoredBy( String author ) {
+		
+		return getCommentsAuthoredBy( author, 0, 10 );
 	}
 
-	public ArrayList<Comment> getCommentsContaining(String hashtag, int page, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Comment> getCommentsAuthoredBy( String author, int number ) {
+		
+		return getCommentsAuthoredBy( author, 0, number );
 	}
 
-	public ArrayList<Comment> getCommentsAuthoredBy(String author) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Comment> getCommentsAuthoredBy( String author, int page, int pageSize ) {
+		CommentDAO dao = new CommentDAO( );
+		
+		return new ArrayList<Comment>( dao.getCommentsAuthoredBy( author, page, pageSize ) );
 	}
-
-	public ArrayList<Comment> getCommentsAuthoredBy(String author, int number) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<Comment> getCommentsAuthoredBy(String author, int page, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Long getCommentsAuthoredCount( String author ) {
+		CommentDAO dao = new CommentDAO( );
+		
+		return dao.getCommentsAuthoredCount( author );
 	}
 
 	public ArrayList<Comment> getCommentsMentioning(String author) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return getCommentsMentioning( author, 0, 10 );
 	}
 
 	public ArrayList<Comment> getCommentsMentioning(String author, int number) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return getCommentsMentioning( author, 0, number );
 	}
 
-	public ArrayList<Comment> getCommentsMentioning(String author, int page, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Comment> getCommentsMentioning( String author, int page, int pageSize ) {
+		CommentDAO dao = new CommentDAO( );
+		
+		return new ArrayList<Comment>( dao.getCommentsMentioning( author, page, pageSize ) );
+	}
+	
+	public Long getCommentsMentioningCount( String author ) {
+		CommentDAO dao = new CommentDAO( );
+		
+		return dao.getCommentsMentioningCount( author );
 	}
 
-	public ArrayList<String> getPopularHashtags() {
+	public ArrayList<String> getPopularHashtags( ) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -201,22 +225,5 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 		// TODO Auto-generated method stub
 		
 	}
-
-	public Long getCommentsContainingCount(String hashtag) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Long getCommentsAuthoredCount(String author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Long getCommentsMentioningCount(String author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }
