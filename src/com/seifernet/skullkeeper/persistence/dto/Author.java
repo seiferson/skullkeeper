@@ -2,54 +2,20 @@ package com.seifernet.skullkeeper.persistence.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table( name="microblog_author" )
+/**
+ * 
+ * @author seifer
+ *
+ */
 public class Author implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	private Long id;
+	private String nickname;
 	
-	private String author;
+	private String identifier;
 	
 	private String email;
-	
-	@Column( name = "auth_token" )
-	private String authToken;
-
-	/**
-	 * @return the id
-	 */
-	public Long getId( ) {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the author
-	 */
-	public String getAuthor() {
-		return author;
-	}
-
-	/**
-	 * @param author the author to set
-	 */
-	public void setAuthor(String author) {
-		this.author = author;
-	}
 
 	/**
 	 * @return the email
@@ -66,17 +32,31 @@ public class Author implements Serializable{
 	}
 
 	/**
-	 * @return the authToken
+	 * @return the identifier
 	 */
-	public String getAuthToken() {
-		return authToken;
+	public String getIdentifier() {
+		return identifier;
 	}
 
 	/**
-	 * @param authToken the authToken to set
+	 * @param identifier the identifier to set
 	 */
-	public void setAuthToken(String authToken) {
-		this.authToken = authToken;
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
+	 * @return the nickname
+	 */
+	public String getNickname() {
+		return nickname;
+	}
+
+	/**
+	 * @param nickname the nickname to set
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }

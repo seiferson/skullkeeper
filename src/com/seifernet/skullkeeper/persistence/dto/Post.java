@@ -7,21 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import com.google.gson.Gson;
-
 /**
- * Comment is the basic data unit
- * in the microblog api, contains 
+ * Basic data unit in the microblog api, contains 
  * all the information about a specific post.
  * 
  * @author Seifer ( Cuauhtemoc Herrera Muñoz )
@@ -29,16 +16,13 @@ import com.google.gson.Gson;
  * @since 1.0.0
  *
  */
-@Entity
-@Table( name="microblog_comment" )
-public class Comment implements Serializable{
+public class Post implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private static Pattern authortagPattern = Pattern.compile( "@\\S*" );
 	private static Pattern hashtagPattern = Pattern.compile( "#\\S*" );
-	
-	@Id
-	private Long id;
+
+	private String id;
 	
 	private Date date;
 	
@@ -48,19 +32,25 @@ public class Comment implements Serializable{
 	
 	private String content;
 	
-	@ManyToMany
-	@LazyCollection( LazyCollectionOption.FALSE )
-	@JoinTable( name = "hashtag_index", 
-		joinColumns = { @JoinColumn( name="comment", referencedColumnName="id" ) },  
-		inverseJoinColumns = { @JoinColumn( name="hashtag", referencedColumnName="id") } ) 
-	private List<Hashtag> hashtags;
+	private List<String> hashtags;
 	
-	@ManyToMany
-	@LazyCollection( LazyCollectionOption.FALSE )
-	@JoinTable( name = "authortag_index", 
-		joinColumns = { @JoinColumn( name="comment", referencedColumnName="id" ) },  
-		inverseJoinColumns = { @JoinColumn( name="authortag", referencedColumnName="id") } ) 
-	private List<Author> authortags;
+	private List<String> authortags;
+	
+	public Post(  ){
+		
+	}
+	
+	public Post(String id, Date date, String hash, Author author, String content, List<String> hashtags,
+			List<String> authortags) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.hash = hash;
+		this.author = author;
+		this.content = content;
+		this.hashtags = hashtags;
+		this.authortags = authortags;
+	}
 	
 	/**
 	 * @return the date
@@ -93,17 +83,19 @@ public class Comment implements Serializable{
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
+	
+
 	/**
 	 * Get all the authortag strings from post content,
 	 * a authortag is defined as any string that starts with
@@ -141,28 +133,16 @@ public class Comment implements Serializable{
 	}
 	
 	/**
-	 * Creates a JSON formatted text version of the
-	 * object 
-	 * 
-	 * @return JSON encoded string that represents the object
-	 */
-	public String toJSON(  ){
-		Gson jsonConverter = new Gson( );
-		
-		return jsonConverter.toJson( this );
-	}
-
-	/**
 	 * @return the hashtags
 	 */
-	public List<Hashtag> getHashtags() {
+	public List<String> getHashtags() {
 		return hashtags;
 	}
 
 	/**
 	 * @param hashtags the hashtags to set
 	 */
-	public void setHashtags(List<Hashtag> hashtags) {
+	public void setHashtags(List<String> hashtags) {
 		this.hashtags = hashtags;
 	}
 
@@ -183,14 +163,14 @@ public class Comment implements Serializable{
 	/**
 	 * @return the authortags
 	 */
-	public List<Author> getAuthortags() {
+	public List<String> getAuthortags() {
 		return authortags;
 	}
 
 	/**
 	 * @param authortags the authortags to set
 	 */
-	public void setAuthortags(List<Author> authortags) {
+	public void setAuthortags(List<String> authortags) {
 		this.authortags = authortags;
 	}
 
