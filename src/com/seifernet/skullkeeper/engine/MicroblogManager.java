@@ -31,8 +31,6 @@ public interface MicroblogManager {
 
 	public ArrayList<Post> getCommentsMentioning( String author, int page, int pageSize );
 	
-	public Long getCommentsMentioningCount( String author );
-	
 	public ArrayList<String> getPopularHashtags( int number );
 
 }

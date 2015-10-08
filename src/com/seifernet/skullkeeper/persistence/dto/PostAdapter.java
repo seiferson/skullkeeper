@@ -7,8 +7,10 @@ import org.bson.types.ObjectId;
 
 /**
  * 
- * @author seifer
- *
+ * 
+ * @author Seifer ( Cuauhtemoc Herrera Muñoz )
+ * @version 1.0.0
+ * @since 1.0.0
  */
 public class PostAdapter {
 	
@@ -89,7 +91,6 @@ public class PostAdapter {
 			hashtags,
 			authortags
 		);
-		
 	}
 
 }

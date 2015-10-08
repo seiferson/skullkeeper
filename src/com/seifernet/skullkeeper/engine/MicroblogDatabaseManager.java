@@ -19,17 +19,22 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * 
 	 */
 	public void publishComment( Post comment ) {
+		PostDAO.getInstance( ).insertComment( comment );
+	}
+	
+	/**
+	 * 
+	 */
+	public void editComment( Post comment ) {
+		PostDAO.getInstance( ).editComment( comment );
 		
 	}
 	
-	public void editComment( Post comment ) {
-		
-		
-	}
-
-	public void deleteComment(Post comment) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * 
+	 */
+	public void deleteComment( Post comment ) {
+		PostDAO.getInstance( ).deleteComment( comment );
 	}
 
 	/**
@@ -40,7 +45,7 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * @return Comment from database if found
 	 */
 	public Post getComment( String hash ) {
-		return null;
+		return PostDAO.getInstance( ).getComment( hash );
 	}
 	
 	/**
@@ -50,38 +55,32 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * @return List containing a k page with n comments published
 	 */
 	public ArrayList<Post> getComments( int page, int pageSize ) {
-		
-		return null;
+		return PostDAO.getInstance( ).getComments( page, pageSize );
 	}
 
+	/**
+	 * 
+	 */
 	public ArrayList<Post> getCommentsContaining( String hashtag, int page, int pageSize ) {
-		return null;
+		return PostDAO.getInstance( ).getCommentsContaining( hashtag, page, pageSize );
 	}
 
+	/**
+	 * 
+	 */
 	public ArrayList<Post> getCommentsAuthoredBy( String author, int page, int pageSize ) {
-		return null;
+		return PostDAO.getInstance( ).getCommentsAuthoredBy( author, page, pageSize );
 	}
 	
-	public ArrayList<Post> getCommentsMentioning( String author, int page, int pageSize ) {
-		return null;
-	}
-	
-	public ArrayList<String> getPopularHashtags( ) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 
+	 */
+	public ArrayList<Post> getCommentsMentioning( String authortag, int page, int pageSize ) {
+		return PostDAO.getInstance().getCommentsMentioning( authortag, page, pageSize );
 	}
 
-	public ArrayList<String> getPopularHashtags(int number) {
-		// TODO Auto-generated method stub
+	public ArrayList<String> getPopularHashtags( int number ) {
 		return null;
 	}
-
-	@Override
-	public Long getCommentsMentioningCount(String author) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }
