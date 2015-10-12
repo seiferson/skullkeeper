@@ -1,0 +1,21 @@
+Example of request
+{ "post" : "This is a @seifer rest test #hashtag #resteasy" }
+
+
+db.post.insert( {
+        "date" : ISODate("2014-02-10T10:50:42.389Z"),
+        "hash" : "673eb027e9c056f57140322807351dd5",
+        "author" : {
+            "nickname" : "seifer",
+            "identifier" : "@seifer",
+            "email" : "seifer.ch@gmail.com"
+        },
+        "content" : "This is a @seifer rest test #hashtag #resteasy",
+        "hashtags" : [
+            { "hashtag" : "#hashtag" },
+            { "hashtag" : "#resteasy" }
+        ],
+        "authortags" : [
+            { "authortag" : "@seifer" }
+        ]
+    } );

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.seifernet.skullkeeper.persistence.dto.Post;
 
 /**
- * Defines basic operations that every microblog manager
+ * Defines basic operations that a microblog manager
  * must implement.
  * 
  * @author Seifer ( Cuauhtemoc Herrera Muñoz )

@@ -2,11 +2,17 @@ package com.seifernet.skullkeeper.persistence.dto;
 
 import java.io.Serializable;
 
+import org.mongodb.morphia.annotations.Embedded;
+
 /**
+ * Comment's author data
  * 
- * @author seifer
+ * @author Seifer ( Cuauhtemoc Herrera Muñoz )
+ * @version 1.0.0
+ * @since 1.0.0
  *
  */
+@Embedded
 public class Author implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -16,6 +22,16 @@ public class Author implements Serializable{
 	private String identifier;
 	
 	private String email;
+
+	public Author( ){
+		
+	}
+	
+	public Author(String nickname, String identifier, String email) {
+		this.nickname = nickname;
+		this.identifier = identifier;
+		this.email = email;
+	}
 
 	/**
 	 * @return the email

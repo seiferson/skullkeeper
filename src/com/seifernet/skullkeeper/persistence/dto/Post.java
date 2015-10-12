@@ -3,9 +3,10 @@ package com.seifernet.skullkeeper.persistence.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
 
 /**
  * Basic data unit in the microblog api, contains 
@@ -15,32 +16,33 @@ import java.util.regex.Pattern;
  * @version 1.0.0
  * @since 1.0.0
  */
+@Entity
 public class Post implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private static Pattern authortagPattern = Pattern.compile( "@\\S*" );
-	private static Pattern hashtagPattern = Pattern.compile( "#\\S*" );
-
+	
+	@Id
 	private String id;
 	
 	private Date date;
 	
 	private String hash;
 	
+	@Embedded
 	private Author author;
 	
 	private String content;
 	
-	private List<String> hashtags;
+	private ArrayList<String> hashtags;
 	
-	private List<String> authortags;
+	private ArrayList<String> authortags;
 	
 	public Post(  ){
 		
 	}
 	
-	public Post(String id, Date date, String hash, Author author, String content, List<String> hashtags,
-			List<String> authortags) {
+	public Post(String id, Date date, String hash, Author author, String content, ArrayList<String> hashtags,
+			ArrayList<String> authortags) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -93,55 +95,17 @@ public class Post implements Serializable{
 		this.id = id;
 	}
 	
-	
-
-	/**
-	 * Get all the authortag strings from post content,
-	 * a authortag is defined as any string that starts with
-	 * an '@' symbol
-	 * 
-	 * @return A list with all the occurrences of authortags  
-	 */
-	public ArrayList<String> getContentAuthortags(  ){
-		ArrayList<String> authortags = new ArrayList<String>( );
-		Matcher matcher = authortagPattern.matcher( content );
-		
-		while( matcher.find( ) ){
-			authortags.add( matcher.group( 0 ) );
-		}
-		
-		return authortags;
-	}
-	
-	/**
-	 * Get all the hashtag strings from post content,
-	 * a hashtag is defined as any string that starts with
-	 * a '#' symbol
-	 * 
-	 * @return A list with all the occurrences of hashtags  
-	 */
-	public ArrayList<String> getContentHashtags(  ){
-		ArrayList<String> hashtags = new ArrayList<String>( );
-		Matcher matcher = hashtagPattern.matcher( content );
-		
-		while( matcher.find( ) ){
-			hashtags.add( matcher.group( 0 ) );
-		}
-		
-		return hashtags;
-	}
-	
 	/**
 	 * @return the hashtags
 	 */
-	public List<String> getHashtags() {
+	public ArrayList<String> getHashtags() {
 		return hashtags;
 	}
 
 	/**
 	 * @param hashtags the hashtags to set
 	 */
-	public void setHashtags(List<String> hashtags) {
+	public void setHashtags(ArrayList<String> hashtags) {
 		this.hashtags = hashtags;
 	}
 
@@ -162,14 +126,14 @@ public class Post implements Serializable{
 	/**
 	 * @return the authortags
 	 */
-	public List<String> getAuthortags() {
+	public ArrayList<String> getAuthortags() {
 		return authortags;
 	}
 
 	/**
 	 * @param authortags the authortags to set
 	 */
-	public void setAuthortags(List<String> authortags) {
+	public void setAuthortags(ArrayList<String> authortags) {
 		this.authortags = authortags;
 	}
 
