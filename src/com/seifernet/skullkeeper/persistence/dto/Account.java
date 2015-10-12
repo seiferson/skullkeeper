@@ -6,6 +6,14 @@ import java.util.Date;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+/**
+ * Account data, used to identify a specific user
+ * 
+ * @author Seifer ( Cuauhtemoc Herrera Muñoz )
+ * @version 1.0.0
+ * @since 1.0.0
+ *
+ */
 @Entity
 public class Account implements Serializable{
 

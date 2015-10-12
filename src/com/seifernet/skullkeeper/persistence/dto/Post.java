@@ -9,7 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 /**
- * Basic data unit in the microblog api, contains 
+ * Basic data unit in the microblogging api, contains 
  * all the information about a specific post.
  * 
  * @author Seifer ( Cuauhtemoc Herrera Muñoz )
@@ -35,22 +35,20 @@ public class Post implements Serializable{
 	
 	private ArrayList<String> hashtags;
 	
-	private ArrayList<String> authortags;
+	private ArrayList<String> usertags;
 	
 	public Post(  ){
-		
+		//STUB empty constructor
 	}
 	
-	public Post(String id, Date date, String hash, Author author, String content, ArrayList<String> hashtags,
-			ArrayList<String> authortags) {
-		super();
+	public Post( String id, Date date, String hash, Author author, String content, ArrayList<String> hashtags, ArrayList<String> usertags ) {
 		this.id = id;
 		this.date = date;
 		this.hash = hash;
 		this.author = author;
 		this.content = content;
 		this.hashtags = hashtags;
-		this.authortags = authortags;
+		this.usertags = usertags;
 	}
 	
 	/**
@@ -124,20 +122,6 @@ public class Post implements Serializable{
 	}
 
 	/**
-	 * @return the authortags
-	 */
-	public ArrayList<String> getAuthortags() {
-		return authortags;
-	}
-
-	/**
-	 * @param authortags the authortags to set
-	 */
-	public void setAuthortags(ArrayList<String> authortags) {
-		this.authortags = authortags;
-	}
-
-	/**
 	 * @return the hash
 	 */
 	public String getHash() {
@@ -149,6 +133,20 @@ public class Post implements Serializable{
 	 */
 	public void setHash(String hash) {
 		this.hash = hash;
+	}
+
+	/**
+	 * @return the usertags
+	 */
+	public ArrayList<String> getUsertags() {
+		return usertags;
+	}
+
+	/**
+	 * @param usertags the usertags to set
+	 */
+	public void setUsertags(ArrayList<String> usertags) {
+		this.usertags = usertags;
 	}
 
 	

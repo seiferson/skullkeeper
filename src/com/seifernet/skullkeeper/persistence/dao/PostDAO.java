@@ -2,21 +2,26 @@ package com.seifernet.skullkeeper.persistence.dao;
 
 import java.util.ArrayList;
 
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
+
 import com.seifernet.skullkeeper.persistence.dto.Post;
 
 /**
- * 
+ * Post data access object
  * 
  * @author Seifer ( Cuauhtemoc Herrera Muñoz )
  * @version 1.0.0
  * @since 1.0.0
+ * 
  */
 public class PostDAO extends GenericDAO{
 	
 	private static PostDAO instance;
 	
 	/**
-	 * 
+	 * Constructor with call to parent constructor
+	 * to create the morphia datastore.
 	 */
 	private PostDAO( ){
 		super( );
@@ -37,7 +42,8 @@ public class PostDAO extends GenericDAO{
 	 * 
 	 * @param post
 	 */
-	public void insertComment( Post post ){
+	public void createPost( Post post ){
+		
 		datastore.save( post );
 	}
 	
@@ -45,15 +51,21 @@ public class PostDAO extends GenericDAO{
 	 * 
 	 * @param post
 	 */
-	public void editComment( Post post ){
-		//datastore.( Filters.eq( "_id", new ObjectId( post.getId( ) ) ), PostAdapter.toDocument( post ) );
+	public void editPost( Post post ){
+		Query<Post> query = datastore.createQuery( Post.class ).field( "id" ).equal( post.getId( ) );
+		UpdateOperations<Post> operations = datastore.createUpdateOperations( Post.class )
+				.set( "content", post.getContent( ) )
+				.set( "hashtags", post.getHashtags( ) )
+				.set( "usertags", post.getUsertags( ) )
+				.set( "date" , post.getDate( ) );
+		datastore.update( query, operations );
 	}
 	
 	/**
 	 * 
 	 * @param post
 	 */
-	public void deleteComment( Post post ){
+	public void deletePost( Post post ){
 		datastore.delete( post );
 	}
 	
@@ -62,7 +74,7 @@ public class PostDAO extends GenericDAO{
 	 * @param hash
 	 * @return
 	 */
-	public Post getComment( String hash ){
+	public Post getPostByHash( String hash ){
 		return datastore.createQuery( Post.class ).field( "hash" ).equal( hash ).asList( ).get( 0 );
 	}
 	
@@ -72,7 +84,7 @@ public class PostDAO extends GenericDAO{
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Post> getComments( int page, int pageSize ){
+	public ArrayList<Post> getPosts( int page, int pageSize ){
 		return new ArrayList<Post>( datastore.createQuery( Post.class ).limit( pageSize ).offset( page * pageSize ).asList( ) );
 	}
 	
@@ -83,7 +95,7 @@ public class PostDAO extends GenericDAO{
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Post> getCommentsContaining( String hashtag, int page, int pageSize ){
+	public ArrayList<Post> getPostsContaining( String hashtag, int page, int pageSize ){
 		//ArrayList<Document> documents = collection.find( Filters.eq( "hashtags.hashtag" ,  hashtag ) ).skip( page * pageSize ).limit( pageSize ).into( new ArrayList<Document>() );
 		ArrayList<Post> comments = new ArrayList<Post>( );
 		//for( Document d : documents ){
@@ -100,7 +112,7 @@ public class PostDAO extends GenericDAO{
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Post> getCommentsAuthoredBy( String author, int page, int pageSize ){
+	public ArrayList<Post> getPostsAuthoredBy( String author, int page, int pageSize ){
 		//ArrayList<Document> documents = collection.find( Filters.eq( "author.identifier",  author ) ).skip( page * pageSize ).limit( pageSize ).into( new ArrayList<Document>() );
 		ArrayList<Post> comments = new ArrayList<Post>( );
 		//for( Document d : documents ){
@@ -117,7 +129,7 @@ public class PostDAO extends GenericDAO{
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Post> getCommentsMentioning( String authortag, int page, int pageSize ){
+	public ArrayList<Post> getPostsMentioning( String authortag, int page, int pageSize ){
 		//ArrayList<Document> documents = collection.find( Filters.eq( "authortags.authortag",  authortag ) ).skip( page * pageSize ).limit( pageSize ).into( new ArrayList<Document>() );
 		ArrayList<Post> comments = new ArrayList<Post>( );
 		//for( Document d : documents ){

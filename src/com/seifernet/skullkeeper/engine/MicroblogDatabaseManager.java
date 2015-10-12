@@ -19,14 +19,14 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * 
 	 */
 	public void publishComment( Post comment ) {
-		PostDAO.getInstance( ).insertComment( comment );
+		PostDAO.getInstance( ).createPost( comment );
 	}
 	
 	/**
 	 * 
 	 */
 	public void editComment( Post comment ) {
-		PostDAO.getInstance( ).editComment( comment );
+		PostDAO.getInstance( ).editPost( comment );
 		
 	}
 	
@@ -34,7 +34,7 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * 
 	 */
 	public void deleteComment( Post comment ) {
-		PostDAO.getInstance( ).deleteComment( comment );
+		PostDAO.getInstance( ).deletePost( comment );
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * @return Comment from database if found
 	 */
 	public Post getComment( String hash ) {
-		return PostDAO.getInstance( ).getComment( hash );
+		return PostDAO.getInstance( ).getPostByHash( hash );
 	}
 	
 	/**
@@ -55,28 +55,28 @@ public class MicroblogDatabaseManager implements MicroblogManager{
 	 * @return List containing a k page with n comments published
 	 */
 	public ArrayList<Post> getComments( int page, int pageSize ) {
-		return PostDAO.getInstance( ).getComments( page, pageSize );
+		return PostDAO.getInstance( ).getPosts( page, pageSize );
 	}
 
 	/**
 	 * 
 	 */
 	public ArrayList<Post> getCommentsContaining( String hashtag, int page, int pageSize ) {
-		return PostDAO.getInstance( ).getCommentsContaining( hashtag, page, pageSize );
+		return PostDAO.getInstance( ).getPostsContaining( hashtag, page, pageSize );
 	}
 
 	/**
 	 * 
 	 */
 	public ArrayList<Post> getCommentsAuthoredBy( String author, int page, int pageSize ) {
-		return PostDAO.getInstance( ).getCommentsAuthoredBy( author, page, pageSize );
+		return PostDAO.getInstance( ).getPostsAuthoredBy( author, page, pageSize );
 	}
 	
 	/**
 	 * 
 	 */
 	public ArrayList<Post> getCommentsMentioning( String authortag, int page, int pageSize ) {
-		return PostDAO.getInstance().getCommentsMentioning( authortag, page, pageSize );
+		return PostDAO.getInstance().getPostsMentioning( authortag, page, pageSize );
 	}
 
 	public ArrayList<String> getPopularHashtags( int number ) {
