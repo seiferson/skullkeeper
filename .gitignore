@@ -1,6 +1,7 @@
 target/
 *.class
 /build/
+.idea/
 
 .classpath
 .jsdtscope*
@@ -8,3 +9,4 @@ target/
 .tern-project
 org.eclipse.*
 org.hibernate.*
+*.iml
